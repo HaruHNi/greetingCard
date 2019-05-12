@@ -1,3 +1,9 @@
+const CATEGORY_MAP = {
+    'partner': '동료',
+    'friend': '친구',
+    'family': '가족'
+}
+
 export default class CardListView {
     constructor (list) {
         this.listFilter = document.getElementById('cardListFilter')
@@ -27,7 +33,7 @@ export default class CardListView {
     render (filter = () => true) {
         const list = this.list.filter(filter).reverse()
         const listItems = list.map(item => {
-            return `<li>${item.category}에게 - ${item.message}</li>`
+            return `<li>${CATEGORY_MAP[item.category]}에게 - ${item.message}</li>`
         })
 
         this.listView.innerHTML = listItems.join('')

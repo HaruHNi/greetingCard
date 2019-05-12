@@ -6,10 +6,16 @@ export default class CardFormView {
 
     bind (submitCallback) {
         this.cardForm.onsubmit = () => {
+            const { value: message } = this.cardForm.message
+            if (message === '') {
+                alert('Message를 입력해주세요.')
+                return false
+            }
+
             if (submitCallback) {
                 submitCallback()
             }
-
+            
             this.reset()
             return false
         }
@@ -20,7 +26,7 @@ export default class CardFormView {
         const { value: message } = this.cardForm.message
 
         return {
-            id: '',
+            id: Date.now().toString(16),
             date: Date.now(),
             category,
             message

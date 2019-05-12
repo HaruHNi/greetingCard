@@ -1,21 +1,12 @@
 const webpack = require('webpack')
+const merge = require('webpack-merge')
+const webpackBaseConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = {
+module.exports = merge(webpackBaseConfig, {
     mode: 'development',
-    entry: {
-        app: [
-            './src/app.js',
-            './src/styles/app.scss'
-        ]
-    },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            },
             {
                 test: /\.scss$/,
                 use: [
@@ -34,9 +25,6 @@ module.exports = {
             inject: true
         })
     ],
-    resolve: {
-        extensions: ['.js']
-    },
     devtool: 'source-map',
     devServer: {
         port: 8888,
@@ -47,4 +35,4 @@ module.exports = {
             color: true
         }
     }
-}
+})

@@ -1,28 +1,23 @@
-const webpack = require('webpack')
+const merge = require('webpack-merge')
+const webpackBaseConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = {
+module.exports = merge(webpackBaseConfig, {
     mode: 'production',
-    entry: {
-        app: [
-            './src/app.js',
-            './src/styles/app.scss'
-        ]
-    },
     output: {
         filename: 'js/[name].[chunkhash].js'
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
                 test: /\.scss$/,
                 use: [
-                    'style-loader',
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
                     'css-loader',
                     'sass-loader'
                 ]
@@ -39,12 +34,12 @@ module.exports = {
                 collapseWhitespace: true,
                 removeAttributeQuotes: true
             }
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].[chunkhash].css'
         })
     ],
-    resolve: {
-        extensions: ['.js']
-    },
     optimization: {
-        minimize: true
+        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
     }
-}
+})

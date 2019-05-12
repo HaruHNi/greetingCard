@@ -1,10 +1,5 @@
 const LOCALSTORAGE_KEY = 'greetingCard'
 
-const test = () => {}
-export {
-    test
-}
-
 export default class Storage {
     constructor () {
         this.localStorage = window.localStorage
