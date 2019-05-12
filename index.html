@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>새해 인사카드 보내기</title>
+    </head>
+    <body>
+        <main>
+            <h1 class="title">새해 인사카드 작성</h1>
+            <section class="card-form">
+                <form id="cardForm" action="">
+                    <fieldset>
+                        <legend>카테고리 선택</legend>
+                        <input id="partner" type="radio" name="category" value="partner" checked="true">
+                        <label for="partner">동료</label>
+                        <input id="friend" type="radio" name="category" value="friend">
+                        <label for="friend">친구</label>
+                        <input id="family" type="radio" name="category" value="family">
+                        <label for="family">가족</label>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>메시지 작성</legend>
+                        <textarea name="message"></textarea>
+                    </fieldset>
+
+                    <button type="submit">전송</button>
+                </form>
+            </section>
+
+            <section class="card-list-wrap">
+                <select id="cardListFilter" name="filter">
+                    <option value="all">전체</option>
+                    <option value="partner">동료</option>
+                    <option value="friend">친구</option>
+                    <option value="family">가족</option>
+                </select>
+
+                <ul id="cardList" class="card-list"></ul>
+            </section>
+        </main>
+    </body>
+</html>
